@@ -53,9 +53,8 @@ public class MainTeleOp extends CommandOpMode {
         duckySpinnerSubsystem = new DuckySpinnerSubsystem(duckySpinner);
         duckySpinnerCommand = new DuckySpinnerCommand(duckySpinnerSubsystem);
 
-        if(gPad1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).get()) {
-            driveCommmand = new DriveCommmand(driveSubsystem, gPad1::getLeftY, gPad1::getRightX);
-        }
+        
+        driveCommmand = new DriveCommmand(driveSubsystem, gPad1::getLeftY, gPad1::getRightX);
 
         gPad1.getGamepadButton(GamepadKeys.Button.B).whenHeld(duckySpinnerCommand);
 
