@@ -1,18 +1,22 @@
 package org.firstinspires.ftc.teamcode.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
+import com.arcrobotics.ftclib.gamepad.GamepadEx;
+import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 
 import java.util.function.DoubleSupplier;
 
-public class DriveCommmand extends CommandBase {
+public class ArcadeDriveCommmand extends CommandBase {
 
     private DriveSubsystem driveSubsystem;
     private DoubleSupplier fSpeed, tSpeed;
-    private double slowCoefficient;
+    private final double SLOW_COEFFICIENT = 0.33;
 
-    public DriveCommmand(DriveSubsystem dSystem, DoubleSupplier forwardSpeed, DoubleSupplier turnSpeed) {
+    private GamepadEx gPad;
+
+    public ArcadeDriveCommmand(DriveSubsystem dSystem, DoubleSupplier forwardSpeed, DoubleSupplier turnSpeed) {
         driveSubsystem = dSystem;
         fSpeed = forwardSpeed;
         tSpeed = turnSpeed;
@@ -23,7 +27,10 @@ public class DriveCommmand extends CommandBase {
 
     @Override
     public void execute() {
-        driveSubsystem.drive(fSpeed.getAsDouble(), tSpeed.getAsDouble());
+        // Normal Way
+        driveSubsystem.arcadeSlowDrive(fSpeed.getAsDouble() * 0.75, tSpeed.getAsDouble());
     }
+
+
 
 }

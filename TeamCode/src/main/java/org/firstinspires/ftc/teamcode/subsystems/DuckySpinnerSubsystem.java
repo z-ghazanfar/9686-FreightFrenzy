@@ -11,8 +11,8 @@ public class DuckySpinnerSubsystem extends SubsystemBase {
         dS = duckySpinner;
     }
 
-    public void start() { dS.set(0.5); }
-    public void startReverse() { dS.set(-0.5); }
+    public void start() { dS.set(0.3); }
+    public void startReverse() { dS.set(-0.3); }
     public void stop() { dS.stopMotor(); }
 
 }

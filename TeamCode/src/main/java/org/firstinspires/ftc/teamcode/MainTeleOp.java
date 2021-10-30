@@ -1,22 +1,20 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.RunCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.commands.DriveCommmand;
+import org.firstinspires.ftc.teamcode.commands.ArcadeDriveCommmand;
 import org.firstinspires.ftc.teamcode.commands.DuckySpinnerCommand;
+import org.firstinspires.ftc.teamcode.commands.SlowArcadeDriveCommand;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.DuckySpinnerSubsystem;
 
 @TeleOp(name = "MainTeleOp-CB")
 public class MainTeleOp extends CommandOpMode {
-
-    private final double SLOW_MODE = 0.33;
 
     private Motor fL, bL, fR, bR;
     private MotorGroupTemp leftDrive, rightDrive;
@@ -29,7 +27,8 @@ public class MainTeleOp extends CommandOpMode {
     private DriveSubsystem driveSubsystem;
     private DuckySpinnerSubsystem duckySpinnerSubsystem;
 
-    private DriveCommmand driveCommmand;
+    private ArcadeDriveCommmand arcadeDriveCommmand;
+    private SlowArcadeDriveCommand slowArcadeDriveCommand;
     private DuckySpinnerCommand duckySpinnerCommand;
 
     @Override
@@ -50,16 +49,20 @@ public class MainTeleOp extends CommandOpMode {
         imu.init();
 
         driveSubsystem = new DriveSubsystem(leftDrive, rightDrive, imu);
+
+
         duckySpinnerSubsystem = new DuckySpinnerSubsystem(duckySpinner);
         duckySpinnerCommand = new DuckySpinnerCommand(duckySpinnerSubsystem);
 
-        
-        driveCommmand = new DriveCommmand(driveSubsystem, gPad1::getLeftY, gPad1::getRightX);
+        arcadeDriveCommmand = new ArcadeDriveCommmand(driveSubsystem, gPad1::getLeftY, gPad1::getRightX);
+        slowArcadeDriveCommand = new SlowArcadeDriveCommand(driveSubsystem, gPad1::getLeftY, gPad1::getRightX, 0.33);
 
         gPad1.getGamepadButton(GamepadKeys.Button.B).whenHeld(duckySpinnerCommand);
 
+        gPad1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(slowArcadeDriveCommand);
+
         register(driveSubsystem);
-        driveSubsystem.setDefaultCommand(driveCommmand);
+        driveSubsystem.setDefaultCommand(arcadeDriveCommmand);
 
     }
 }

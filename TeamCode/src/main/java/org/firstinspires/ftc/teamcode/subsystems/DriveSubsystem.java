@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.MotorGroupTemp;
 public class DriveSubsystem extends SubsystemBase {
 
     private MotorGroupTemp leftDrive, rightDrive; // Makes it so that left motors move in tandem and right motors move in tandem.
-    private DifferentialDrive arcadeDrive;
+    private DifferentialDrive differentialDrive;
     private DifferentialDriveOdometry differentialOdom;
     private RevIMU imu;
 
@@ -29,7 +29,7 @@ public class DriveSubsystem extends SubsystemBase {
         imu = revIMU;
 
         resetEncoders();
-        arcadeDrive = new DifferentialDrive(leftDrive, rightDrive);
+        differentialDrive = new DifferentialDrive(leftDrive, rightDrive);
         differentialOdom = new DifferentialDriveOdometry(imu.getRotation2d());
     }
 
@@ -59,12 +59,12 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     // Sets speed of arcade drive in teleop
-    public void drive(double forwardSpeed, double turnSpeed) {
-        arcadeDrive.arcadeDrive(-forwardSpeed, -turnSpeed);
+    public void arcadeDrive(double forwardSpeed, double turnSpeed) {
+        differentialDrive.arcadeDrive(-forwardSpeed, -turnSpeed);
     }
 
-    public void slowDrive(double forwardSpeed, double turnSpeed) {
-        arcadeDrive.arcadeDrive(-forwardSpeed, -turnSpeed, true);
+    public void arcadeSlowDrive(double forwardSpeed, double turnSpeed) {
+        differentialDrive.arcadeDrive(-forwardSpeed, -turnSpeed, true);
     }
 
     // Repeatedly called whenever DriveSubsystem is in use (which is the entire time the bot is running)

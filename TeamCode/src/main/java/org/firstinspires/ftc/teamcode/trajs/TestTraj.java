@@ -14,15 +14,13 @@ public class TestTraj {
 
         Pose2d sideStart = new Pose2d(0.0, 0.0,
                 Rotation2d.fromDegrees(0));
-        Pose2d crossScale = new Pose2d(3.0, 0.0,
-                Rotation2d.fromDegrees(0));
+        Pose2d crossScale = new Pose2d(0.5, 2,
+                Rotation2d.fromDegrees(-90));
 
         ArrayList interiorWaypoints = new ArrayList<Translation2d>();
-        interiorWaypoints.add(new Translation2d(1, 0));
-        interiorWaypoints.add(new Translation2d(2, -1));
+        interiorWaypoints.add(new Translation2d(0.5, 0));
 
         TrajectoryConfig config = new TrajectoryConfig(0.5, 0.5);
-        config.setReversed(true);
 
         Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
                 sideStart,
