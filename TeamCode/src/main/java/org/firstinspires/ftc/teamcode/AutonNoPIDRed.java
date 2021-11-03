@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.RunCommand;
+import com.arcrobotics.ftclib.command.WaitUntilCommand;
 import com.arcrobotics.ftclib.controller.wpilibcontroller.RamseteController;
 import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
@@ -14,8 +15,8 @@ import org.firstinspires.ftc.teamcode.commands.RamseteCommandRe;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.trajs.*;
 
-@Autonomous(name="NoPIDTest")
-public class AutonNoPID extends CommandOpMode {
+@Autonomous(name="NoPIDRed")
+public class AutonNoPIDRed extends CommandOpMode {
 
     private Motor frontLeft, frontRight, backLeft, backRight;
     private MotorGroupTemp leftDrive, rightDrive;
@@ -54,13 +55,13 @@ public class AutonNoPID extends CommandOpMode {
 
         driveSubsystem = new DriveSubsystem(leftDrive, rightDrive, imu);
         driveSubsystem.getWheelSpeeds().normalize(1.5);
-        ramseteCommand = new RamseteCommandRe(TestTraj.generateTrajectory(), driveSubsystem::getPose,
+        ramseteCommand = new RamseteCommandRe(Trajectories.trajRed(), driveSubsystem::getPose,
                 new RamseteController(DriveConstants.B, DriveConstants.ZETA),
                 ddKinematics,
                 driveSubsystem::driveAuton,
                 telemetry);
 
-        schedule(new ParallelCommandGroup(
+        schedule(new WaitUntilCommand(this::isStarted).andThen(new ParallelCommandGroup(
                 ramseteCommand,
                 new RunCommand(() -> {
 //                    telemetry.addData("CurPos", driveSubsystem.getPose());
@@ -68,6 +69,6 @@ public class AutonNoPID extends CommandOpMode {
 //                    telemetry.addData("Right Encoders", rightDrive.getPositions());
                     telemetry.update();
                 })
-        ));
+        )));
     }
 }

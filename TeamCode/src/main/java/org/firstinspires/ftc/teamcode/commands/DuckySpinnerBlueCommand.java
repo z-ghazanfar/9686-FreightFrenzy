@@ -4,11 +4,11 @@ import com.arcrobotics.ftclib.command.CommandBase;
 
 import org.firstinspires.ftc.teamcode.subsystems.DuckySpinnerSubsystem;
 
-public class DuckySpinnerCommand extends CommandBase {
+public class DuckySpinnerBlueCommand extends CommandBase {
 
     private DuckySpinnerSubsystem dSSubsystem;
 
-    public DuckySpinnerCommand(DuckySpinnerSubsystem duckySpinnerSubsystem) {
+    public DuckySpinnerBlueCommand(DuckySpinnerSubsystem duckySpinnerSubsystem) {
         dSSubsystem = duckySpinnerSubsystem;
         addRequirements(dSSubsystem);
     }

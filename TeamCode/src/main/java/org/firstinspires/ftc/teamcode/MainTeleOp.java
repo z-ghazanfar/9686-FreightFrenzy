@@ -8,7 +8,8 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commands.ArcadeDriveCommmand;
-import org.firstinspires.ftc.teamcode.commands.DuckySpinnerCommand;
+import org.firstinspires.ftc.teamcode.commands.DuckySpinnerBlueCommand;
+import org.firstinspires.ftc.teamcode.commands.DuckySpinnerRedCommand;
 import org.firstinspires.ftc.teamcode.commands.SlowArcadeDriveCommand;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.DuckySpinnerSubsystem;
@@ -29,7 +30,8 @@ public class MainTeleOp extends CommandOpMode {
 
     private ArcadeDriveCommmand arcadeDriveCommmand;
     private SlowArcadeDriveCommand slowArcadeDriveCommand;
-    private DuckySpinnerCommand duckySpinnerCommand;
+    private DuckySpinnerBlueCommand duckySpinnerBlueCommand;
+    private DuckySpinnerRedCommand duckySpinnerRedCommand;
 
     @Override
     public void initialize() {
@@ -52,12 +54,14 @@ public class MainTeleOp extends CommandOpMode {
 
 
         duckySpinnerSubsystem = new DuckySpinnerSubsystem(duckySpinner);
-        duckySpinnerCommand = new DuckySpinnerCommand(duckySpinnerSubsystem);
+        duckySpinnerBlueCommand = new DuckySpinnerBlueCommand(duckySpinnerSubsystem);
+        duckySpinnerRedCommand = new DuckySpinnerRedCommand(duckySpinnerSubsystem);
 
         arcadeDriveCommmand = new ArcadeDriveCommmand(driveSubsystem, gPad1::getLeftY, gPad1::getRightX);
         slowArcadeDriveCommand = new SlowArcadeDriveCommand(driveSubsystem, gPad1::getLeftY, gPad1::getRightX, 0.33);
 
-        gPad1.getGamepadButton(GamepadKeys.Button.B).whenHeld(duckySpinnerCommand);
+        gPad1.getGamepadButton(GamepadKeys.Button.X).whenHeld(duckySpinnerBlueCommand);
+        gPad1.getGamepadButton(GamepadKeys.Button.B).whenHeld(duckySpinnerRedCommand);
 
         gPad1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(slowArcadeDriveCommand);
 

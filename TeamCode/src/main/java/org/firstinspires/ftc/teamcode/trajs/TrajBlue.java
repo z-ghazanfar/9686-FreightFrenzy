@@ -9,16 +9,16 @@ import com.arcrobotics.ftclib.trajectory.TrajectoryGenerator;
 
 import java.util.ArrayList;
 
-public class TestTraj {
+public class TrajBlue {
     public static Trajectory generateTrajectory() {
 
         Pose2d sideStart = new Pose2d(0.0, 0.0,
                 Rotation2d.fromDegrees(0));
-        Pose2d crossScale = new Pose2d(0.5, 2,
-                Rotation2d.fromDegrees(-90));
+        Pose2d crossScale = new Pose2d(-0.2, -0.6,
+                Rotation2d.fromDegrees(0));
 
         ArrayList interiorWaypoints = new ArrayList<Translation2d>();
-        interiorWaypoints.add(new Translation2d(0.5, 0));
+        interiorWaypoints.add(new Translation2d(-0.2, 0));
 
         TrajectoryConfig config = new TrajectoryConfig(0.5, 0.5);
 
