@@ -18,7 +18,7 @@ public class IntakeSubsystem extends SubsystemBase {
         intake.set(0.75);
     }
 
-    public void startReverseIntake(){
+    public void startOuttake(){
         intake.set(-0.75);
     }
 
