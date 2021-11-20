@@ -4,33 +4,28 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class IntakeSubsystem extends SubsystemBase {
-    private Motor intake;
-    private SimpleServo door;
+    private SimpleServo door, flicker;
 
-    public IntakeSubsystem(Motor iM, SimpleServo doorServo){
-        intake = iM;
+    public IntakeSubsystem(SimpleServo doorServo, SimpleServo flickerServo){
         door = doorServo;
+        flicker = flickerServo;
     }
 
-    public void startIntake(){
-        intake.set(0.75);
-    }
-
-    public void startOuttake(){
-        intake.set(-0.75);
-    }
-
-    public void stopIntake(){
-        intake.set(0);
-    }
-
-    public void openDoor(){
-        door.setPosition(0.5);
-    }
+    public void openDoor(){ door.setPosition(1);}
 
     public void closeDoor(){
         door.setPosition(0);
     }
+
+    public void initFlicker(){
+        flicker.setPosition(0);
+    }
+
+    public void flickFlicker() {
+        flicker.setPosition(1);
+    }
+
 }
