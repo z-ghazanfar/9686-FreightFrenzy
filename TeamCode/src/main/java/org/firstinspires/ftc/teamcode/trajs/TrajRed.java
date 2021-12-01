@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.arcrobotics.ftclib.trajectory.Trajectory;
 import com.arcrobotics.ftclib.trajectory.TrajectoryConfig;
 import com.arcrobotics.ftclib.trajectory.TrajectoryGenerator;
+import com.sun.tools.javac.util.List;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class TrajRed {
         Pose2d crossScale = new Pose2d(-0.2, 1,
                 Rotation2d.fromDegrees(0));
 
+        // Forward is positive x, Left is positive y
         ArrayList interiorWaypoints = new ArrayList<Translation2d>();
         interiorWaypoints.add(new Translation2d(-0.2, 0));
 
@@ -27,6 +29,15 @@ public class TrajRed {
                 interiorWaypoints,
                 crossScale,
                 config);
-        return trajectory;
+
+        Trajectory trajectory1 = TrajectoryGenerator.generateTrajectory(
+                new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
+                List.of(
+                        new Translation2d(0.5, 0)
+                ),
+                new Pose2d(0.5, 1, Rotation2d.fromDegrees(90)),
+                config);
+
+        return trajectory1;
     }
 }
